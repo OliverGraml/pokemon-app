@@ -11,3 +11,20 @@
 .card p {
   text-shadow: 0 -1px 0 #999;
 }
+
+.card button {
+  background: transparent;
+  border: 3px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 16px;
+  color: ivory;
+}
+
+.ball button {
+  background: transparent;
+  border-radius: 5px;
+  border: 3px solid white;
+  color: white;
+  cursor: pointer;
+}

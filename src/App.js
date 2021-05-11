@@ -1,8 +1,10 @@
 import './App.css';
 import PokemonCard from './PokemonCard';
+import {useState} from 'react';
+import Pokeball from './Pokeball';
 
 function App() {
-  const pokemon = [
+  const initialPokemon = [
     {name: 'Pikachu', type: 'Electro'},
     {name: 'Glumanda', type: 'Feuer'},
     {name: 'Bisasam', type: 'Pflanze'},
@@ -11,11 +13,49 @@ function App() {
     {name: 'Vulpix', type: 'Feuer'},
   ];
 
+  const [pokemon, setPokemon] = useState(initialPokemon);
+  const [pokedex, setPokedex] = useState([]);
+
+  function placeIntoPokedex(name) {
+    const pokemonToAdd = pokemon.find((pokemon) => pokemon.name === name);
+    setPokedex([pokemonToAdd, ...pokedex]);
+    removePokemon(name);
+  }
+
+  function removePokemon(name) {
+    const remainingPokemon = pokemon.filter((pokemon) => pokemon.name !== name);
+    setPokemon(remainingPokemon);
+  }
+
+  function setPokemonFree(name) {
+    const pokemonToAdd = pokedex.find((pokemon) => pokemon.name === name);
+
+    const remainingPokemon = pokedex.filter((pokemon) => pokemon.name !== name);
+    setPokedex(remainingPokemon);
+
+    setPokemon([pokemonToAdd, ...pokemon]);
+  }
+
+  //render function
   return (
     <div>
       <h1>Pokemon</h1>
+      <h3>My Pokeball ({pokedex.length})</h3>
+      <section className="flex-container">
+        {pokedex.map((pokemon) => (
+          <Pokeball
+            name={pokemon.name}
+            type={pokemon.type}
+            onSetFree={setPokemonFree}
+          />
+        ))}
+      </section>
       {pokemon.map((pokemon) => (
-        <PokemonCard name={pokemon.name} type={pokemon.type} />
+        <PokemonCard
+          name={pokemon.name}
+          type={pokemon.type}
+          onPlaceIntoPokedex={placeIntoPokedex}
+        />
       ))}
     </div>
   );

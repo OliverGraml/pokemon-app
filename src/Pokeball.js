@@ -1,12 +1,11 @@
-import React from 'react';
-import './PokemonCard.css';
+import './Pokeball.css';
 
-export default function PokemonCard({name, type, onPlaceIntoPokedex}) {
+export default function Pokeball({name, type, onSetFree}) {
   return (
-    <article className="card" style={{background: getColor(type)}}>
-      <h2>{name}</h2>
+    <article className="ball" style={{background: getColor(type)}}>
+      <h3>{name}</h3>
       <p>{type}</p>
-      <button onClick={() => onPlaceIntoPokedex(name)}>Pokeball</button>
+      <button onClick={() => onSetFree(name)}>Free</button>
     </article>
   );
 }
