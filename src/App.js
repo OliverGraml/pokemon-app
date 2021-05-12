@@ -1,7 +1,7 @@
-import './App.css';
 import PokemonCard from './PokemonCard';
 import {useState} from 'react';
 import Pokeball from './Pokeball';
+import styled from 'styled-components/macro';
 
 function App() {
   const initialPokemon = [
@@ -41,7 +41,7 @@ function App() {
     <div>
       <h1>Pokemon</h1>
       <h3>My Pokeball ({pokedex.length})</h3>
-      <section className="flex-container">
+      <GridWrapper className="flex-container">
         {pokedex.map((pokemon) => (
           <Pokeball
             name={pokemon.name}
@@ -49,7 +49,7 @@ function App() {
             onSetFree={setPokemonFree}
           />
         ))}
-      </section>
+      </GridWrapper>
       {pokemon.map((pokemon) => (
         <PokemonCard
           name={pokemon.name}
@@ -62,3 +62,10 @@ function App() {
 }
 
 export default App;
+
+const GridWrapper = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+`;
